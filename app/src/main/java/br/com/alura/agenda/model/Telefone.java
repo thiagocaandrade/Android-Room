@@ -9,10 +9,18 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
 @Entity
 public class Telefone {
 
+    private TipoTelefone tipo;
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String numero;
-    private TipoTelefone tipo;
+    private int alunoId;
+
+
+    public Telefone(String numero, TipoTelefone tipo) {
+
+        this.numero = numero;
+        this.tipo = tipo;
+    }
 
     public int getAlunoId() {
         return alunoId;
@@ -25,10 +33,9 @@ public class Telefone {
     @ForeignKey(entity = Aluno.class,
             parentColumns = "id",
             childColumns = "alunoId",
-    onUpdate = CASCADE,
-    onDelete = CASCADE)
+            onUpdate = CASCADE,
+            onDelete = CASCADE)
 
-    private int alunoId;
 
     public int getId() {
         return id;
